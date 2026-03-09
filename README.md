@@ -1,29 +1,16 @@
 # dingtalk-wiki-mcp
 
-**中文**：一个用于 **钉钉知识库（DingTalk Wiki / Docs）读写** 的 MCP Server。  
-**English**: An MCP server for **reading and writing DingTalk Wiki / Docs**.
+An MCP server for **reading and writing DingTalk Wiki / Docs**.
 
-> This project exists as a practical complement to DingTalk's official MCP offering.  
+[中文说明 / Chinese documentation](./README.zh-CN.md)
+
+> This project exists as a practical complement to DingTalk's official MCP offering.
 > **The official DingTalk MCP does not provide Wiki read/write capabilities**, so this open-source project fills that gap.
 
 ---
 
-## 背景 / Background
+## Background
 
-### 中文
-钉钉官方提供了 MCP 相关能力，但在实际使用中，**知识库（Wiki / Docs）读写并没有被完整覆盖**。如果你希望让 AI Agent 或 MCP Client 直接：
-
-- 列出知识库空间
-- 浏览知识库目录/文档节点
-- 创建文档、表格、脑图、文件夹
-- 查询组织架构和用户信息
-
-那么官方能力并不够用。
-
-**dingtalk-wiki-mcp** 就是为这个场景补上的一个开源实现：
-它专注于把钉钉 Wiki / Docs 能力通过 MCP 暴露出来，方便接入 OpenClaw、mcporter 或其他 MCP-compatible clients。
-
-### English
 DingTalk provides official MCP-related capabilities, but in practice, **Wiki / Docs read-write workflows are not fully covered**.
 
 If you want an AI agent or MCP client to:
@@ -39,16 +26,8 @@ then the official offering is not enough.
 
 ---
 
-## 项目定位 / Positioning
+## Positioning
 
-### 中文
-这个项目不是为了替代钉钉官方 MCP，而是作为它的**补充模块**：
-
-- 官方 MCP 负责官方已覆盖的能力
-- 本项目补充 **知识库读写能力**
-- 你可以单独使用它，也可以和官方 MCP 一起使用
-
-### English
 This project is **not** intended to replace DingTalk's official MCP. It is designed as a **complementary extension**:
 
 - the official MCP covers what it already supports
@@ -57,7 +36,7 @@ This project is **not** intended to replace DingTalk's official MCP. It is desig
 
 ---
 
-## 功能特性 / Features
+## Features
 
 ### Wiki / Docs
 - List Wiki workspaces
@@ -80,29 +59,28 @@ This project is **not** intended to replace DingTalk's official MCP. It is desig
 - Show current config
 - Use a default operator from local config
 
+### Skill included
+This repository also includes an **OpenClaw / agent skill definition**:
+
+- `SKILL.md`
+
+That means the project can be used not only as a standalone MCP server, but also as a reusable skill package in agent-based workflows.
+
 ---
 
-## 适用场景 / Use Cases
+## Use Cases
 
-### 中文
-适合以下场景：
-
-- 给 AI Agent 增加钉钉知识库访问能力
-- 在企业内部知识库中自动创建文档
-- 结合工作流/自动化系统批量生成钉钉文档
-- 让 MCP Client 直接读取知识库结构，辅助导航与整理
-
-### English
 Useful when you want to:
 
 - give an AI agent access to DingTalk Wiki
 - create documents in DingTalk automatically
 - integrate DingTalk Docs into workflow automation
 - let MCP clients inspect and navigate knowledge-base structures
+- reuse the project as a skill-based building block in OpenClaw-style agent setups
 
 ---
 
-## 要求 / Requirements
+## Requirements
 
 - Node.js 18+
 - A DingTalk app with the required API permissions
@@ -113,7 +91,7 @@ Useful when you want to:
 
 ---
 
-## 快速开始 / Quick Start
+## Quick Start
 
 ### 1) Install
 
@@ -185,7 +163,7 @@ node index.js
 
 ---
 
-## 示例 / Example Usage
+## Example Usage
 
 ### Show config
 
@@ -222,7 +200,7 @@ mcporter call dingtalk-wiki.get_user_info userid="your_user_id"
 
 ---
 
-## 可用工具 / Available MCP Tools
+## Available MCP Tools
 
 - `set_operator`
 - `show_config`
@@ -238,7 +216,7 @@ mcporter call dingtalk-wiki.get_user_info userid="your_user_id"
 
 ---
 
-## 权限说明 / Permissions
+## Permissions
 
 Depending on what you use, your DingTalk app may need permissions such as:
 
@@ -251,35 +229,23 @@ Please refer to the DingTalk Open Platform documentation for the latest permissi
 
 ---
 
-## 安全说明 / Security Notes
+## Security Notes
 
-### 中文
-- `config.json` 包含你的本地用户和 workspace 配置，**不要提交到 Git 仓库**
-- 仓库里已经默认忽略 `config.json` 和 `.env`
-- 建议把 AppKey / AppSecret 通过环境变量注入，而不是写死到代码里
-
-### English
 - `config.json` contains your local user and workspace metadata, so **do not commit it**
 - this repository already ignores `config.json` and `.env`
 - inject AppKey / AppSecret via environment variables instead of hardcoding them
 
 ---
 
-## 限制 / Limitations
+## Limitations
 
-### 中文
-- 本项目是社区补充实现，不是钉钉官方项目
-- 某些 API 需要企业侧权限审批
-- `search_wiki` 当前更偏向“跳转辅助”，而不是完整全文检索实现
-
-### English
 - This is a community-maintained complement, not an official DingTalk project
 - some APIs require enterprise approval on the DingTalk side
 - `search_wiki` is currently more of a search-entry helper than a full-text search implementation
 
 ---
 
-## 相关链接 / Related Links
+## Related Links
 
 - [DingTalk Open Platform - Knowledge Base Overview](https://open.dingtalk.com/document/development/knowledge-base-overview)
 - [Create Team Space Document](https://open.dingtalk.com/document/development/create-team-space-document)
