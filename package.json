@@ -1,0 +1,30 @@
+{
+  "name": "dingtalk-wiki-mcp",
+  "version": "1.0.0",
+  "description": "钉钉知识库 MCP Server - 支持读写操作",
+  "main": "index.js",
+  "bin": {
+    "dingtalk-wiki-mcp": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["mcp", "dingtalk", "wiki", "knowledge-base"],
+  "author": "ianen",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ianen/dingtalk-wiki-mcp.git"
+  },
+  "homepage": "https://github.com/ianen/dingtalk-wiki-mcp",
+  "bugs": {
+    "url": "https://github.com/ianen/dingtalk-wiki-mcp/issues"
+  },
+  "type": "commonjs",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.25.3",
+    "axios": "^1.13.4",
+    "zod": "^4.3.6"
+  }
+}

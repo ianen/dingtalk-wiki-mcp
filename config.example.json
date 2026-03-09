@@ -1,0 +1,18 @@
+{
+  "defaultUser": "your-default-user",
+  "users": {
+    "your-default-user": {
+      "name": "Your Name",
+      "userId": "your-user-id",
+      "unionId": "your-union-id"
+    }
+  },
+  "workspaces": {
+    "Your Workspace": {
+      "id": "your_workspace_id",
+      "url": "https://alidocs.dingtalk.com/i/spaces/your-space-id/overview",
+      "type": "TEAM"
+    }
+  },
+  "appKey": "your-app-key"
+}
