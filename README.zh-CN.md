@@ -92,6 +92,7 @@ node index.js
 - 列出 Wiki 工作空间
 - 获取工作空间详情
 - 列出 Wiki 节点（目录 / 文档）
+- 通过附带的浏览器辅助脚本读取普通文档正文
 - 创建：
   - `DOC`
   - `WORKBOOK`
@@ -134,6 +135,33 @@ node index.js
 ![创建文档 Demo](./assets/demo-create-doc.svg)
 
 > 这些 Demo 图是基于典型命令与输出流程制作的说明型素材，所有租户相关数据都已移除。
+
+---
+
+## 实验性功能：通过浏览器会话读取普通文档正文
+
+钉钉公开 OpenAPI 目前仍没有稳定、官方的普通文档正文读取路径。
+
+如果你现在就需要可用方案，仓库里附带了一个 **实验性的浏览器辅助脚本**：
+
+```bash
+npm run read:doc -- --url "https://alidocs.dingtalk.com/i/nodes/<dentryUuid>" --output ./tmp/doc.md
+```
+
+这个脚本会：
+
+- 连接本地已经登录的 Edge 浏览器会话
+- 如果需要，会等待你完成钉钉网页登录
+- 调用登录态下的 Alidocs 内部接口
+- 把普通文档正文渲染成 Markdown
+
+注意：
+
+- 这 **不是官方公开 API 路径**
+- 它更适合作为导出 / 同步场景下的实用补充方案
+- workspace / node 的结构探索，仍建议优先使用现有 MCP 工具
+
+详细说明见 [docs/browser-assisted-doc-read.zh-CN.md](./docs/browser-assisted-doc-read.zh-CN.md)。
 
 ---
 
@@ -256,6 +284,7 @@ mcporter call --stdio "node ./index.js" create_wiki_doc workspace_id="your_works
 - 部分 API 需要企业侧权限审批
 - `search_wiki` 当前更偏向“跳转辅助”，不是完整全文检索实现
 - 目前项目仍未实现通过官方公开 API 读取普通 DingTalk 文档正文
+- 仓库已附带实验性的浏览器辅助导出脚本，但它依赖本地已登录浏览器会话
 - 当前 Notable / `.able` 支持的是数据表和 records 读取，不是任意正文导出
 
 ---

@@ -92,6 +92,7 @@ node index.js
 - List Wiki workspaces
 - Get workspace details
 - List Wiki nodes (folders / docs)
+- Read normal DingTalk document body with the bundled browser-assisted helper
 - Create:
   - `DOC`
   - `WORKBOOK`
@@ -134,6 +135,33 @@ So it can be reused as a **skill package** in OpenClaw-style agent workflows.
 ![Create document demo](./assets/demo-create-doc.svg)
 
 > These demo images are illustrative documentation assets built from representative command/output flows, with all tenant-specific data removed.
+
+---
+
+## Experimental: read normal document body via browser session
+
+The public DingTalk OpenAPI still does not expose normal document body content in a clean, supported way.
+
+For users who need a practical workflow now, this repository includes an **experimental browser-assisted helper**:
+
+```bash
+npm run read:doc -- --url "https://alidocs.dingtalk.com/i/nodes/<dentryUuid>" --output ./tmp/doc.md
+```
+
+What it does:
+
+- connects to a locally logged-in Edge browser session
+- waits for DingTalk web login if needed
+- calls authenticated Alidocs internal web endpoints
+- renders the document body to Markdown
+
+Notes:
+
+- this is **not** an official public API path
+- it is intended as a practical workaround for export / sync scenarios
+- existing MCP tools remain the recommended way to locate workspace / node structure first
+
+See [docs/browser-assisted-doc-read.md](./docs/browser-assisted-doc-read.md) for details.
 
 ---
 
@@ -256,6 +284,7 @@ Please refer to DingTalk Open Platform documentation for the latest permission n
 - Some APIs require enterprise approval on the DingTalk side
 - `search_wiki` is currently more of a search-entry helper than a full-text search implementation
 - Reading normal DingTalk document body content via official public API is still not implemented in this project
+- An experimental browser-assisted helper is included for normal document-body export, but it depends on a local logged-in browser session
 - Notable / `.able` support currently covers sheets and records, not arbitrary document-body export
 
 ---

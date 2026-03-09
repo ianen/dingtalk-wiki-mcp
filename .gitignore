@@ -2,5 +2,7 @@ node_modules/
 .env
 .env.local
 config.json
+.browser/
+.output/
 *.log
 .DS_Store

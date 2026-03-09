@@ -8,7 +8,8 @@
   },
   "scripts": {
     "start": "node index.js",
-    "check": "node --check index.js",
+    "check": "node --check index.js && node --check scripts/read-wiki-doc-browser.js",
+    "read:doc": "node scripts/read-wiki-doc-browser.js",
     "test": "echo \"No automated tests yet\""
   },
   "keywords": [
@@ -37,6 +38,7 @@
     "@modelcontextprotocol/sdk": "^1.25.3",
     "axios": "^1.13.4",
     "dotenv": "^16.6.1",
+    "puppeteer-core": "^24.38.0",
     "zod": "^4.3.6"
   }
 }
