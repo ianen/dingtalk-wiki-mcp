@@ -12,9 +12,7 @@
 > DingTalk's official MCP does **not** provide Wiki / Docs read-write capability.  
 > This project is an open-source complement that makes AI agents and MCP clients actually able to **read, browse, and create DingTalk Wiki / Docs content**.
 
-## Why this repo matters
-
-Users should understand the value in 5 seconds:
+## Repository Highlights
 
 - **Official MCP gap**: Wiki / Docs read-write is not covered
 - **This project adds it**: workspace browsing, node browsing, and document creation
