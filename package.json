@@ -1,16 +1,17 @@
 {
   "name": "dingtalk-wiki-mcp",
   "version": "1.0.0",
-  "description": "钉钉知识库 MCP Server - 支持读写操作",
+  "description": "DingTalk Wiki / Docs read-write MCP server that fills the gap left by DingTalk official MCP.",
   "main": "index.js",
   "bin": {
     "dingtalk-wiki-mcp": "./index.js"
   },
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "check": "node --check index.js",
+    "test": "echo \"No automated tests yet\""
   },
-  "keywords": ["mcp", "dingtalk", "wiki", "knowledge-base"],
+  "keywords": ["mcp", "model-context-protocol", "dingtalk", "wiki", "docs", "knowledge-base", "ai-agent", "openclaw", "javascript"],
   "author": "ianen",
   "license": "MIT",
   "repository": {

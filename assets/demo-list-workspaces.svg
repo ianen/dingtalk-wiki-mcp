@@ -1,0 +1,20 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="720" rx="24" fill="#0B1020"/>
+  <rect x="40" y="40" width="1200" height="640" rx="20" fill="#111827" stroke="#334155"/>
+  <circle cx="84" cy="82" r="10" fill="#EF4444"/>
+  <circle cx="116" cy="82" r="10" fill="#F59E0B"/>
+  <circle cx="148" cy="82" r="10" fill="#10B981"/>
+  <text x="190" y="89" fill="#CBD5E1" font-size="24" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace">Demo 1 · List Wiki Workspaces</text>
+  <text x="80" y="150" fill="#93C5FD" font-size="24" font-family="ui-monospace, monospace">$ mcporter call dingtalk-wiki.list_wiki_workspaces</text>
+  <text x="80" y="210" fill="#E2E8F0" font-size="22" font-family="ui-monospace, monospace">📚 Wiki workspaces (3)</text>
+  <text x="80" y="260" fill="#A7F3D0" font-size="20" font-family="ui-monospace, monospace">1. Product Knowledge Base</text>
+  <text x="120" y="295" fill="#CBD5E1" font-size="18" font-family="ui-monospace, monospace">ID: workspace_product_demo</text>
+  <text x="120" y="325" fill="#CBD5E1" font-size="18" font-family="ui-monospace, monospace">Type: TEAM</text>
+  <text x="80" y="385" fill="#A7F3D0" font-size="20" font-family="ui-monospace, monospace">2. Engineering Wiki</text>
+  <text x="120" y="420" fill="#CBD5E1" font-size="18" font-family="ui-monospace, monospace">ID: workspace_engineering_demo</text>
+  <text x="120" y="450" fill="#CBD5E1" font-size="18" font-family="ui-monospace, monospace">Type: TEAM</text>
+  <text x="80" y="510" fill="#A7F3D0" font-size="20" font-family="ui-monospace, monospace">3. Operations Docs</text>
+  <text x="120" y="545" fill="#CBD5E1" font-size="18" font-family="ui-monospace, monospace">ID: workspace_ops_demo</text>
+  <text x="120" y="575" fill="#CBD5E1" font-size="18" font-family="ui-monospace, monospace">Type: TEAM</text>
+  <text x="80" y="635" fill="#64748B" font-size="18" font-family="ui-monospace, monospace">Illustrative demo output for repository documentation</text>
+</svg>

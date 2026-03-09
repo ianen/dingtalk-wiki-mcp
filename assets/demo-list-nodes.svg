@@ -1,0 +1,20 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="720" rx="24" fill="#0B1020"/>
+  <rect x="40" y="40" width="1200" height="640" rx="20" fill="#111827" stroke="#334155"/>
+  <circle cx="84" cy="82" r="10" fill="#EF4444"/>
+  <circle cx="116" cy="82" r="10" fill="#F59E0B"/>
+  <circle cx="148" cy="82" r="10" fill="#10B981"/>
+  <text x="190" y="89" fill="#CBD5E1" font-size="24" font-family="ui-monospace, monospace">Demo 2 · Browse Workspace Nodes</text>
+  <text x="80" y="150" fill="#93C5FD" font-size="24" font-family="ui-monospace, monospace">$ mcporter call dingtalk-wiki.list_wiki_nodes workspace_id="workspace_product_demo"</text>
+  <text x="80" y="210" fill="#E2E8F0" font-size="22" font-family="ui-monospace, monospace">📄 Workspace nodes (4)</text>
+  <text x="80" y="265" fill="#FDE68A" font-size="20" font-family="ui-monospace, monospace">1. 📁 Weekly Reports</text>
+  <text x="120" y="300" fill="#CBD5E1" font-size="18" font-family="ui-monospace, monospace">ID: node_weekly_reports_demo</text>
+  <text x="120" y="330" fill="#CBD5E1" font-size="18" font-family="ui-monospace, monospace">Type: FOLDER · Has children: yes</text>
+  <text x="80" y="390" fill="#A7F3D0" font-size="20" font-family="ui-monospace, monospace">2. 📄 Product Overview</text>
+  <text x="120" y="425" fill="#CBD5E1" font-size="18" font-family="ui-monospace, monospace">ID: node_product_overview_demo</text>
+  <text x="120" y="455" fill="#CBD5E1" font-size="18" font-family="ui-monospace, monospace">Type: FILE · Has children: no</text>
+  <text x="80" y="515" fill="#A7F3D0" font-size="20" font-family="ui-monospace, monospace">3. 📄 Release Checklist</text>
+  <text x="120" y="550" fill="#CBD5E1" font-size="18" font-family="ui-monospace, monospace">ID: node_release_checklist_demo</text>
+  <text x="120" y="580" fill="#CBD5E1" font-size="18" font-family="ui-monospace, monospace">Type: FILE · Has children: no</text>
+  <text x="80" y="635" fill="#64748B" font-size="18" font-family="ui-monospace, monospace">Illustrative demo output for repository documentation</text>
+</svg>

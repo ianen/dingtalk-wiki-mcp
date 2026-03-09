@@ -1,0 +1,18 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="720" rx="24" fill="#0B1020"/>
+  <rect x="40" y="40" width="1200" height="640" rx="20" fill="#111827" stroke="#334155"/>
+  <circle cx="84" cy="82" r="10" fill="#EF4444"/>
+  <circle cx="116" cy="82" r="10" fill="#F59E0B"/>
+  <circle cx="148" cy="82" r="10" fill="#10B981"/>
+  <text x="190" y="89" fill="#CBD5E1" font-size="24" font-family="ui-monospace, monospace">Demo 3 · Create a Wiki Document</text>
+  <text x="80" y="150" fill="#93C5FD" font-size="24" font-family="ui-monospace, monospace">$ mcporter call dingtalk-wiki.create_wiki_doc workspace_id="workspace_product_demo" name="Weekly Summary"</text>
+  <text x="80" y="225" fill="#86EFAC" font-size="22" font-family="ui-monospace, monospace">✅ Document created successfully</text>
+  <text x="80" y="285" fill="#E2E8F0" font-size="20" font-family="ui-monospace, monospace">📄 Weekly Summary</text>
+  <text x="120" y="330" fill="#CBD5E1" font-size="18" font-family="ui-monospace, monospace">Node ID: node_weekly_summary_demo</text>
+  <text x="120" y="365" fill="#CBD5E1" font-size="18" font-family="ui-monospace, monospace">DocKey: doc_key_demo</text>
+  <text x="120" y="400" fill="#CBD5E1" font-size="18" font-family="ui-monospace, monospace">Workspace ID: workspace_product_demo</text>
+  <text x="120" y="435" fill="#CBD5E1" font-size="18" font-family="ui-monospace, monospace">Type: DOC</text>
+  <rect x="80" y="500" width="900" height="88" rx="12" fill="#0F172A" stroke="#1E293B"/>
+  <text x="110" y="548" fill="#93C5FD" font-size="18" font-family="ui-monospace, monospace">Typical follow-up: create DOC / WORKBOOK / MIND / FOLDER in the same workflow</text>
+  <text x="80" y="635" fill="#64748B" font-size="18" font-family="ui-monospace, monospace">Illustrative demo output for repository documentation</text>
+</svg>
