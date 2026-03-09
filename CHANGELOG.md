@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1] - 2026-03-09
+
+### Fixed
+- Auto-load `.env` from the current working directory or repository directory when environment variables are not already set
+- Clarified direct stdio vs registered-server mcporter usage in docs
+- Improved `create_wiki_doc` success output so folder / workbook / mind-map creation no longer reports misleading text or `DocKey: undefined`
+
 ## [1.0.0] - 2026-03-09
 
 ### Added

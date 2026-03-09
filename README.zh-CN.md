@@ -42,6 +42,8 @@ DINGTALK_APP_KEY=your-app-key
 DINGTALK_APP_SECRET=your-app-secret
 ```
 
+现在 `index.js` 会在环境变量未显式设置时，自动加载当前工作目录（或仓库目录）下的 `.env`。
+
 ### 3）准备本地配置
 
 ```bash
@@ -162,37 +164,27 @@ node index.js
 
 ## 示例用法
 
-### 查看配置
+### 已注册 server 模式
+
+如果你已经在 MCP client 里把这个 server 注册为 `dingtalk-wiki`：
 
 ```bash
 mcporter call dingtalk-wiki.show_config
-```
-
-### 列出知识库
-
-```bash
 mcporter call dingtalk-wiki.list_wiki_workspaces
-```
-
-### 列出节点
-
-```bash
 mcporter call dingtalk-wiki.list_wiki_nodes workspace_id="your_workspace_id"
-```
-
-### 创建文档
-
-```bash
-mcporter call dingtalk-wiki.create_wiki_doc \
-  workspace_id="your_workspace_id" \
-  name="Weekly Summary" \
-  doc_type="DOC"
-```
-
-### 获取用户信息
-
-```bash
+mcporter call dingtalk-wiki.create_wiki_doc workspace_id="your_workspace_id" name="Weekly Summary" doc_type="DOC"
 mcporter call dingtalk-wiki.get_user_info userid="your_user_id"
+```
+
+### 直接 stdio 模式
+
+如果你不想预先注册 server，而是直接拉起它，那么工具名直接写裸工具名：
+
+```bash
+mcporter call --stdio "node ./index.js" show_config
+mcporter call --stdio "node ./index.js" list_wiki_workspaces
+mcporter call --stdio "node ./index.js" list_wiki_nodes workspace_id="your_workspace_id"
+mcporter call --stdio "node ./index.js" create_wiki_doc workspace_id="your_workspace_id" name="Weekly Summary" doc_type="DOC"
 ```
 
 ---

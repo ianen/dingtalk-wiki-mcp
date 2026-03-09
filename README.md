@@ -42,6 +42,8 @@ DINGTALK_APP_KEY=your-app-key
 DINGTALK_APP_SECRET=your-app-secret
 ```
 
+`index.js` now auto-loads `.env` from the current working directory (or the repo directory) if those variables are not already present in the environment.
+
 ### 3) Prepare local config
 
 ```bash
@@ -162,37 +164,27 @@ When a new project starts, automation can create a standard folder tree such as:
 
 ## Example usage
 
-### Show config
+### Registered server mode
+
+If you have registered this server in your MCP client config under the name `dingtalk-wiki`:
 
 ```bash
 mcporter call dingtalk-wiki.show_config
-```
-
-### List workspaces
-
-```bash
 mcporter call dingtalk-wiki.list_wiki_workspaces
-```
-
-### List nodes
-
-```bash
 mcporter call dingtalk-wiki.list_wiki_nodes workspace_id="your_workspace_id"
-```
-
-### Create a document
-
-```bash
-mcporter call dingtalk-wiki.create_wiki_doc \
-  workspace_id="your_workspace_id" \
-  name="Weekly Summary" \
-  doc_type="DOC"
-```
-
-### Get user info
-
-```bash
+mcporter call dingtalk-wiki.create_wiki_doc workspace_id="your_workspace_id" name="Weekly Summary" doc_type="DOC"
 mcporter call dingtalk-wiki.get_user_info userid="your_user_id"
+```
+
+### Direct stdio mode
+
+If you want to run the server directly without pre-registering it, call the tool names directly:
+
+```bash
+mcporter call --stdio "node ./index.js" show_config
+mcporter call --stdio "node ./index.js" list_wiki_workspaces
+mcporter call --stdio "node ./index.js" list_wiki_nodes workspace_id="your_workspace_id"
+mcporter call --stdio "node ./index.js" create_wiki_doc workspace_id="your_workspace_id" name="Weekly Summary" doc_type="DOC"
 ```
 
 ---

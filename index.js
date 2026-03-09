@@ -11,6 +11,7 @@ const { Server } = require('@modelcontextprotocol/sdk/server/index.js');
 const { StdioServerTransport } = require('@modelcontextprotocol/sdk/server/stdio.js');
 const { CallToolRequestSchema, ListToolsRequestSchema } = require('@modelcontextprotocol/sdk/types.js');
 const axios = require('axios');
+const dotenv = require('dotenv');
 
 // 钉钉 API 配置
 const DINGTALK_API_BASE = 'https://oapi.dingtalk.com';
@@ -18,6 +19,28 @@ const DINGTALK_API_V2 = 'https://api.dingtalk.com';
 const fs = require('fs');
 const path = require('path');
 const CONFIG_PATH = process.env.DINGTALK_WIKI_CONFIG_PATH || path.join(__dirname, 'config.json');
+
+function loadEnvFile(filePath) {
+  if (!filePath || !fs.existsSync(filePath)) {
+    return false;
+  }
+
+  dotenv.config({ path: filePath, override: false });
+  return true;
+}
+
+const DOTENV_CANDIDATES = [
+  process.env.DINGTALK_WIKI_ENV_PATH,
+  path.join(process.cwd(), '.env'),
+  path.join(__dirname, '.env')
+].filter(Boolean);
+
+for (const candidate of DOTENV_CANDIDATES) {
+  if (loadEnvFile(candidate)) {
+    console.error(`[钉钉MCP] 已加载环境变量文件: ${candidate}`);
+    break;
+  }
+}
 
 // 加载配置文件
 let userConfig = {};
@@ -205,7 +228,7 @@ const dingtalk = new DingTalkClient();
 const server = new Server(
   {
     name: 'dingtalk-wiki-mcp',
-    version: '1.0.0'
+    version: '1.0.1'
   },
   {
     capabilities: {
@@ -588,11 +611,42 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
           });
           
           const doc = response.data;
-          
+          const typeLabels = {
+            DOC: '文档',
+            WORKBOOK: '表格',
+            MIND: '脑图',
+            FOLDER: '文件夹'
+          };
+          const typeIcons = {
+            DOC: '📄',
+            WORKBOOK: '📊',
+            MIND: '🧠',
+            FOLDER: '📁'
+          };
+          const typeLabel = typeLabels[doc_type] || '文档';
+          const typeIcon = typeIcons[doc_type] || '📄';
+          const lines = [
+            `✅ ${typeLabel}创建成功！`,
+            '',
+            `${typeIcon} ${name}`,
+            `🗂️ 类型: ${doc_type}`,
+            `🆔 Node ID: ${doc.nodeId}`
+          ];
+
+          if (doc.docKey) {
+            lines.push(`🔑 DocKey: ${doc.docKey}`);
+          }
+          if (doc.url) {
+            lines.push(`🔗 链接: ${doc.url}`);
+          }
+          if (doc.workspaceId) {
+            lines.push(`📂 Workspace ID: ${doc.workspaceId}`);
+          }
+
           return {
             content: [{
               type: 'text',
-              text: `✅ 文档创建成功！\n\n📄 ${name}\n📁 Node ID: ${doc.nodeId}\n🔑 DocKey: ${doc.docKey}\n🔗 链接: ${doc.url}\n📂 Workspace ID: ${doc.workspaceId}`
+              text: lines.join('\n')
             }]
           };
         } catch (error) {

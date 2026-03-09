@@ -1,6 +1,6 @@
 {
   "name": "dingtalk-wiki-mcp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "DingTalk Wiki / Docs read-write MCP server that fills the gap left by DingTalk official MCP.",
   "main": "index.js",
   "bin": {
@@ -11,7 +11,17 @@
     "check": "node --check index.js",
     "test": "echo \"No automated tests yet\""
   },
-  "keywords": ["mcp", "model-context-protocol", "dingtalk", "wiki", "docs", "knowledge-base", "ai-agent", "openclaw", "javascript"],
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "dingtalk",
+    "wiki",
+    "docs",
+    "knowledge-base",
+    "ai-agent",
+    "openclaw",
+    "javascript"
+  ],
   "author": "ianen",
   "license": "MIT",
   "repository": {
@@ -26,6 +36,7 @@
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.25.3",
     "axios": "^1.13.4",
+    "dotenv": "^16.6.1",
     "zod": "^4.3.6"
   }
 }
