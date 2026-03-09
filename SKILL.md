@@ -11,6 +11,8 @@
 - `get_wiki_node` - 获取节点详情
 - `create_wiki_doc` - 创建文档（支持 `DOC` / `WORKBOOK` / `MIND` / `FOLDER`）
 - `search_wiki` - 搜索知识库内容
+- `list_notable_sheets` - 获取 `.able` / AI 表格中的所有数据表
+- `list_notable_records` - 获取指定数据表中的 records
 
 ### 组织架构
 - `list_departments` - 列出部门列表

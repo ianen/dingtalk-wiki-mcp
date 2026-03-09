@@ -78,6 +78,7 @@ node index.js
 | Create mind maps | Not covered | ✅ |
 | Browse workspaces | Not covered | ✅ |
 | Browse nodes / folders | Not covered | ✅ |
+| Read Notable / `.able` records | Not covered | ✅ |
 | MCP client compatibility | Partial / official scope only | ✅ stdio MCP-compatible |
 | OpenClaw skill packaging | No | ✅ includes `SKILL.md` |
 
@@ -97,6 +98,7 @@ node index.js
   - `MIND`
   - `FOLDER`
 - Search Wiki by linking to DingTalk search
+- Read Notable / `.able` sheets and records via official API
 
 ### Organization
 - List departments
@@ -202,6 +204,8 @@ mcporter call --stdio "node ./index.js" create_wiki_doc workspace_id="your_works
 - `list_departments`
 - `get_department_users`
 - `get_user_info`
+- `list_notable_sheets`
+- `list_notable_records`
 
 ---
 
@@ -251,6 +255,8 @@ Please refer to DingTalk Open Platform documentation for the latest permission n
 - This is a community-maintained complement, not an official DingTalk project
 - Some APIs require enterprise approval on the DingTalk side
 - `search_wiki` is currently more of a search-entry helper than a full-text search implementation
+- Reading normal DingTalk document body content via official public API is still not implemented in this project
+- Notable / `.able` support currently covers sheets and records, not arbitrary document-body export
 
 ---
 

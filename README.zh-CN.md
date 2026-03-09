@@ -78,6 +78,7 @@ node index.js
 | 创建 mind map | 未覆盖 | ✅ |
 | 浏览 workspace | 未覆盖 | ✅ |
 | 浏览 nodes / 目录 | 未覆盖 | ✅ |
+| 读取 Notable / `.able` 记录 | 未覆盖 | ✅ |
 | MCP 客户端兼容性 | 官方范围内 | ✅ stdio 兼容 |
 | OpenClaw skill 化复用 | 无 | ✅ 自带 `SKILL.md` |
 
@@ -97,6 +98,7 @@ node index.js
   - `MIND`
   - `FOLDER`
 - 提供跳转式 Wiki 搜索能力
+- 通过官方 API 读取 Notable / `.able` 的数据表和记录
 
 ### 组织架构
 - 列出部门
@@ -202,6 +204,8 @@ mcporter call --stdio "node ./index.js" create_wiki_doc workspace_id="your_works
 - `list_departments`
 - `get_department_users`
 - `get_user_info`
+- `list_notable_sheets`
+- `list_notable_records`
 
 ---
 
@@ -251,6 +255,8 @@ mcporter call --stdio "node ./index.js" create_wiki_doc workspace_id="your_works
 - 本项目是社区补充实现，不是钉钉官方项目
 - 部分 API 需要企业侧权限审批
 - `search_wiki` 当前更偏向“跳转辅助”，不是完整全文检索实现
+- 目前项目仍未实现通过官方公开 API 读取普通 DingTalk 文档正文
+- 当前 Notable / `.able` 支持的是数据表和 records 读取，不是任意正文导出
 
 ---
 

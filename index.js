@@ -151,25 +151,25 @@ class DingTalkClient {
   // Wiki API v2.0 请求
   async wikiRequest(endpoint, params = {}) {
     const token = await this.getAccessToken();
-    
+
     if (!this.operatorId) {
       await this.getCurrentUserUnionId();
     }
-    
+
     const queryParams = new URLSearchParams();
     for (const [key, value] of Object.entries(params)) {
       if (value !== undefined && value !== null) {
         queryParams.append(key, value);
       }
     }
-    
+
     // 添加 operatorId
     if (this.operatorId) {
       queryParams.append('operatorId', this.operatorId);
     }
-    
+
     const url = `${DINGTALK_API_V2}/v2.0/wiki/${endpoint}${queryParams.toString() ? '?' + queryParams.toString() : ''}`;
-    
+
     try {
       const response = await axios({
         method: 'GET',
@@ -177,6 +177,51 @@ class DingTalkClient {
         headers: {
           'x-acs-dingtalk-access-token': token
         }
+      });
+      return response.data;
+    } catch (error) {
+      if (error.response) {
+        throw new Error(`${error.response.data?.message || error.message} (code: ${error.response.data?.code})`);
+      }
+      throw error;
+    }
+  }
+
+  async resolveOperatorId(overrideOperatorId = null) {
+    if (overrideOperatorId) {
+      this.setOperatorId(overrideOperatorId);
+      return this.operatorId;
+    }
+
+    if (!this.operatorId) {
+      await this.getCurrentUserUnionId();
+    }
+
+    if (!this.operatorId) {
+      throw new Error('未设置 operator_id，请传入 operator_id 或在配置文件中设置默认用户');
+    }
+
+    return this.operatorId;
+  }
+
+  async notableRequest(method, pathName, { operatorId = null, params = {}, data = null } = {}) {
+    const token = await this.getAccessToken();
+    const resolvedOperatorId = await this.resolveOperatorId(operatorId);
+    const url = `${DINGTALK_API_V2}${pathName}`;
+
+    try {
+      const response = await axios({
+        method,
+        url,
+        headers: {
+          'x-acs-dingtalk-access-token': token,
+          'Content-Type': 'application/json'
+        },
+        params: {
+          ...params,
+          operatorId: resolvedOperatorId
+        },
+        data
       });
       return response.data;
     } catch (error) {
@@ -228,7 +273,7 @@ const dingtalk = new DingTalkClient();
 const server = new Server(
   {
     name: 'dingtalk-wiki-mcp',
-    version: '1.0.1'
+    version: '1.1.0'
   },
   {
     capabilities: {
@@ -426,6 +471,55 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
             }
           },
           required: ['userid']
+        }
+      },
+      {
+        name: 'list_notable_sheets',
+        description: '读取 AI 表格 / Notable 的所有数据表。对于 .able 节点，直接使用 nodeId 作为 base_id。',
+        inputSchema: {
+          type: 'object',
+          properties: {
+            base_id: {
+              type: 'string',
+              description: 'Notable baseId。对 .able 节点来说，通常就是 nodeId。'
+            },
+            operator_id: {
+              type: 'string',
+              description: '操作者 unionid（不传则使用默认用户）'
+            }
+          },
+          required: ['base_id']
+        }
+      },
+      {
+        name: 'list_notable_records',
+        description: '读取 AI 表格 / Notable 某个数据表中的记录。',
+        inputSchema: {
+          type: 'object',
+          properties: {
+            base_id: {
+              type: 'string',
+              description: 'Notable baseId。对 .able 节点来说，通常就是 nodeId。'
+            },
+            sheet_id: {
+              type: 'string',
+              description: '数据表 ID，可先通过 list_notable_sheets 获取。'
+            },
+            max_results: {
+              type: 'number',
+              description: '返回记录数，默认 20',
+              default: 20
+            },
+            next_token: {
+              type: 'string',
+              description: '分页 token，可选'
+            },
+            operator_id: {
+              type: 'string',
+              description: '操作者 unionid（不传则使用默认用户）'
+            }
+          },
+          required: ['base_id', 'sheet_id']
         }
       }
     ]
@@ -738,14 +832,64 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         const result = await dingtalk.oapiRequest('v2/user/get', {
           userid
         });
-        
+
         // 同时返回 unionid，方便设置 operator
         const userInfo = result.result || {};
         let output = `✅ 用户信息\n\n${JSON.stringify(userInfo, null, 2)}\n\n`;
         if (userInfo.unionid) {
           output += `💡 设置操作者命令:\nmcporter call dingtalk-wiki.set_operator unionid="${userInfo.unionid}"`;
         }
-        
+
+        return {
+          content: [{
+            type: 'text',
+            text: output
+          }]
+        };
+      }
+
+      case 'list_notable_sheets': {
+        const { base_id, operator_id } = args;
+        const result = await dingtalk.notableRequest('GET', `/v1.0/notable/bases/${base_id}/sheets`, {
+          operatorId: operator_id || DEFAULT_OPERATOR_ID
+        });
+        const sheets = result.value || [];
+        let output = `📊 数据表列表 (${sheets.length}个)\n\n`;
+        sheets.forEach((sheet, index) => {
+          output += `${index + 1}. ${sheet.name}\n`;
+          output += `   ID: ${sheet.id}\n\n`;
+        });
+        if (!sheets.length) {
+          output += '（没有返回任何数据表）';
+        }
+        output += `💡 说明: 对 .able 节点，通常直接使用 nodeId 作为 base_id。`;
+
+        return {
+          content: [{
+            type: 'text',
+            text: output
+          }]
+        };
+      }
+
+      case 'list_notable_records': {
+        const { base_id, sheet_id, max_results = 20, next_token, operator_id } = args;
+        const payload = {
+          maxResults: max_results
+        };
+        if (next_token) {
+          payload.nextToken = next_token;
+        }
+        const result = await dingtalk.notableRequest('POST', `/v1.0/notable/bases/${base_id}/sheets/${sheet_id}/records/list`, {
+          operatorId: operator_id || DEFAULT_OPERATOR_ID,
+          data: payload
+        });
+        const records = result.records || [];
+        let output = `📋 数据表记录 (${records.length}条)\n\n`;
+        output += `${JSON.stringify(records, null, 2)}\n\n`;
+        output += `hasMore: ${result.hasMore ? 'true' : 'false'}\n`;
+        output += `nextToken: ${result.nextToken || ''}`;
+
         return {
           content: [{
             type: 'text',

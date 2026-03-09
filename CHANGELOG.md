@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.0] - 2026-03-09
+
+### Added
+- Official Notable / `.able` support via MCP tools:
+  - `list_notable_sheets`
+  - `list_notable_records`
+- Documentation updates clarifying that `.able` sheet / record reads are supported while normal document-body reads are still out of scope
+
 ## [1.0.1] - 2026-03-09
 
 ### Fixed
