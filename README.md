@@ -137,6 +137,33 @@ So it can be reused as a **skill package** in OpenClaw-style agent workflows.
 
 ---
 
+## Experimental: read normal document body via browser session
+
+The public DingTalk OpenAPI still does not expose normal document body content in a clean, supported way.
+
+For users who need a practical workflow now, this repository includes an **experimental browser-assisted helper**:
+
+```bash
+npm run read:doc -- --url "https://alidocs.dingtalk.com/i/nodes/<dentryUuid>" --output ./tmp/doc.md
+```
+
+What it does:
+
+- connects to a managed Edge profile with remote debugging enabled (or reuses an already-available debug session)
+- waits for DingTalk web login if needed
+- calls authenticated Alidocs internal web endpoints
+- renders the document body to Markdown
+
+Notes:
+
+- this is **not** an official public API path
+- it is intended as a practical workaround for export / sync scenarios
+- existing MCP tools remain the recommended way to locate workspace / node structure first
+
+See [docs/browser-assisted-doc-read.md](./docs/browser-assisted-doc-read.md) for details.
+
+---
+
 ## Real use cases
 
 ### 1) AI automatically creates weekly report docs
@@ -256,6 +283,7 @@ Please refer to DingTalk Open Platform documentation for the latest permission n
 - Some APIs require enterprise approval on the DingTalk side
 - `search_wiki` is currently more of a search-entry helper than a full-text search implementation
 - Reading normal DingTalk document body content via official public API is still not implemented in this project
+- An experimental browser-assisted helper is included for normal document-body export, but it depends on a managed browser profile or an already-available browser debug session
 - Notable / `.able` support currently covers sheets and records, not arbitrary document-body export
 
 ---
