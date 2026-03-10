@@ -5,7 +5,7 @@ This helper covers a gap that still exists today:
 - you can already browse workspaces and nodes with the MCP server
 - but normal DingTalk document body export is still not available through the public OpenAPI used by this project
 
-The bundled script provides a practical workaround by using a **locally logged-in browser session**.
+The bundled script provides a practical workaround by using a **managed Edge profile with remote debugging enabled**, or by reusing an already-available browser debug session.
 
 ## Command
 

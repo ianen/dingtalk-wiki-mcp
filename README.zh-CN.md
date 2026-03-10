@@ -92,7 +92,6 @@ node index.js
 - 列出 Wiki 工作空间
 - 获取工作空间详情
 - 列出 Wiki 节点（目录 / 文档）
-- 通过附带的浏览器辅助脚本读取普通文档正文
 - 创建：
   - `DOC`
   - `WORKBOOK`
@@ -150,7 +149,7 @@ npm run read:doc -- --url "https://alidocs.dingtalk.com/i/nodes/<dentryUuid>" --
 
 这个脚本会：
 
-- 连接本地已经登录的 Edge 浏览器会话
+- 连接一个启用远程调试的受管 Edge profile（或复用已有的浏览器调试会话）
 - 如果需要，会等待你完成钉钉网页登录
 - 调用登录态下的 Alidocs 内部接口
 - 把普通文档正文渲染成 Markdown
@@ -284,7 +283,7 @@ mcporter call --stdio "node ./index.js" create_wiki_doc workspace_id="your_works
 - 部分 API 需要企业侧权限审批
 - `search_wiki` 当前更偏向“跳转辅助”，不是完整全文检索实现
 - 目前项目仍未实现通过官方公开 API 读取普通 DingTalk 文档正文
-- 仓库已附带实验性的浏览器辅助导出脚本，但它依赖本地已登录浏览器会话
+- 仓库已附带实验性的浏览器辅助导出脚本，但它依赖受管浏览器 profile 或已有调试浏览器会话
 - 当前 Notable / `.able` 支持的是数据表和 records 读取，不是任意正文导出
 
 ---

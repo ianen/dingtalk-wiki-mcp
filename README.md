@@ -92,7 +92,6 @@ node index.js
 - List Wiki workspaces
 - Get workspace details
 - List Wiki nodes (folders / docs)
-- Read normal DingTalk document body with the bundled browser-assisted helper
 - Create:
   - `DOC`
   - `WORKBOOK`
@@ -150,7 +149,7 @@ npm run read:doc -- --url "https://alidocs.dingtalk.com/i/nodes/<dentryUuid>" --
 
 What it does:
 
-- connects to a locally logged-in Edge browser session
+- connects to a managed Edge profile with remote debugging enabled (or reuses an already-available debug session)
 - waits for DingTalk web login if needed
 - calls authenticated Alidocs internal web endpoints
 - renders the document body to Markdown
@@ -284,7 +283,7 @@ Please refer to DingTalk Open Platform documentation for the latest permission n
 - Some APIs require enterprise approval on the DingTalk side
 - `search_wiki` is currently more of a search-entry helper than a full-text search implementation
 - Reading normal DingTalk document body content via official public API is still not implemented in this project
-- An experimental browser-assisted helper is included for normal document-body export, but it depends on a local logged-in browser session
+- An experimental browser-assisted helper is included for normal document-body export, but it depends on a managed browser profile or an already-available browser debug session
 - Notable / `.able` support currently covers sheets and records, not arbitrary document-body export
 
 ---

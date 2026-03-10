@@ -324,7 +324,7 @@ async function waitForDebugEndpoint(timeoutMs) {
 
 async function ensureManagedBrowser(entryUrl) {
   if (await isDebugEndpointAlive()) {
-    return;
+    return { launchedManagedBrowser: false };
   }
 
   ensureDir(BROWSER_USER_DATA_DIR);
@@ -344,6 +344,7 @@ async function ensureManagedBrowser(entryUrl) {
   child.unref();
 
   await waitForDebugEndpoint(20000);
+  return { launchedManagedBrowser: true };
 }
 
 async function pickAlidocsPage(browser) {
@@ -364,7 +365,7 @@ async function main() {
     printUsageAndExit();
   }
 
-  await ensureManagedBrowser(sourceUrl);
+  const { launchedManagedBrowser } = await ensureManagedBrowser(sourceUrl);
   const browser = await puppeteer.connect({ browserURL: BROWSER_URL, defaultViewport: null });
 
   try {
@@ -412,7 +413,11 @@ async function main() {
       }
 
       if (!prompted) {
-        console.log('If a DingTalk login page appears, finish login in the opened browser window. The script will continue automatically.');
+        if (launchedManagedBrowser) {
+          console.log(`A managed Edge profile was started at ${BROWSER_USER_DATA_DIR}. If a DingTalk login page appears there, finish login in that browser window. The script will continue automatically.`);
+        } else {
+          console.log('A browser with remote debugging is already available. If a DingTalk login page appears there, finish login in that browser window. The script will continue automatically.');
+        }
         prompted = true;
       }
 
@@ -465,7 +470,7 @@ async function main() {
 
     throw new Error('Timed out waiting for DingTalk web login.');
   } finally {
-    await browser.close().catch(() => {});
+    browser.disconnect();
   }
 }
 
